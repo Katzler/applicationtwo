@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
+    #[Route('/main', name: 'main')]
     public function index(): Response
     {
         return $this->render('main/index.html.twig', [
@@ -32,6 +32,8 @@ class MainController extends AbstractController
             $em->persist($todolist);
             $em->flush();
             $this->addFlash('notice','Submitted');
+
+            return $this->redirectToRoute('main');
         }
 
         return $this->render('main/create.html.twig', ['form' => $form->createView()
