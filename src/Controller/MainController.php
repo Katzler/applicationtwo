@@ -20,10 +20,9 @@ class MainController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("create", name="create")
-     */
-    public function create(Request $request) {
+ 
+    #[Route('/create', name: 'create')]
+    public function create(Request $request){
         $todolist = new Todolist();
         $form = $this->createForm(TodoType::class, $todolist);
         $form->handleRequest($request);
