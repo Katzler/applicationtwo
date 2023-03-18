@@ -6,7 +6,10 @@
             <h3 class="mt-5 mb-5">Create Form</h3>
             <div class="col-md-6 offset-md-3">
                 {{ form_start(form) }}
-                    {{form(form)}}
+                    <div class="form-group">
+                        {{form_label(form.title)}}
+                        {{ form_widget(form.title,{'attr':{'class':'form-control'}})}}
+                    </div>
                 {{ form_end(form) }}
             </div>
         </div>
