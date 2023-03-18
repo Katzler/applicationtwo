@@ -14,10 +14,11 @@ use Doctrine\Persistence\ManagerRegistry;
 class MainController extends AbstractController
 {
     #[Route('/main', name: 'main')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
+        $data = $doctrine->getRepository(Todolist::class)->findAll();
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+            'list'=>$data
         ]);
     }
 
