@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 class MainController extends AbstractController
 {
@@ -22,13 +23,20 @@ class MainController extends AbstractController
 
  
     #[Route('/create', name: 'create')]
-    public function create(Request $request){
+    public function create(Request $request,ManagerRegistry $doctrine):Response{
         $todolist = new Todolist();
         $form = $this->createForm(TodoType::class, $todolist);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+            $em->persist($todolist);
+            $em->flush();
+            $this->addFlash('notice','Submitted');
+        }
 
         return $this->render('main/create.html.twig', ['form' => $form->createView()
         ]);
     }
+    
 
 }
