@@ -18,7 +18,10 @@
       <th scope="row">{{data.id}}</th>
       <td>{{ data.title }}</td>
       <td>{{ data.content }}</td>
-      <td>@mdo</td>
+      <td>
+        <a class="btn btn-warning" href="{{ path('update', {'id': data.id }) }}">Update</a>
+        {# <a class="btn btn-danger" href="{{ path('delete', {'id': data.id }) }}">Delete</a> #}
+      </td>
     </tr>
     {% endfor %}
   </tbody>
