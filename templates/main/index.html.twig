@@ -2,6 +2,11 @@
 
 {% block body %}
 <div class="container">
+      {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
     <table class="table">
   <thead>
     <tr>
@@ -20,7 +25,7 @@
       <td>{{ data.content }}</td>
       <td>
         <a class="btn btn-warning" href="{{ path('update', {'id': data.id }) }}">Update</a>
-        {# <a class="btn btn-danger" href="{{ path('delete', {'id': data.id }) }}">Delete</a> #}
+        <a class="btn btn-danger" href="{{ path('delete', {'id': data.id }) }}">Delete</a>
       </td>
     </tr>
     {% endfor %}

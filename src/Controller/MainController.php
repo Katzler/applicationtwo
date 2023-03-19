@@ -42,7 +42,7 @@ class MainController extends AbstractController
     }
 
     //Update knapp
-    #[Route('/update/{id}', name: 'update')] //Detta kan vara fel sätt att hämta ID, testar.
+    #[Route('/update/{id}', name: 'update')] 
     public function update(Request $request, $id, ManagerRegistry $doctrine):Response{
         $todolist = $doctrine->getRepository(Todolist::class)->find($id);
         $form = $this->createForm(TodoType::class, $todolist);
@@ -59,5 +59,17 @@ class MainController extends AbstractController
         return $this->render('main/update.html.twig', ['form' => $form->createView()
         ]);
     }
+
+     //Delete knapp
+     #[Route('/delete/{id}', name: 'delete')]
+     public function delete(Request $request, $id, ManagerRegistry $doctrine):Response{
+         $data = $doctrine->getRepository(Todolist::class)->find($id);
+         $em = $doctrine->getManager();
+         $em->remove($data);
+         $em->flush();
+         $this->addFlash('notice','Deleted');
+
+         return $this->redirectToRoute('main');
+     }
 
 }
