@@ -7,13 +7,18 @@
                     {{ message }}
                 </div>
             {% endfor %}
+
+  <div class="d-flex justify-content-center mb-3 mt-5">
+      <a class="btn btn-primary" href="{{ path('create') }}">Create New Task</a>
+    </div>
+
     <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
       <th scope="col">Content</th>
-      <th scope="col">Action</th>
+      <th scope="col">Update or Remove task </th>
     </tr>
   </thead>
   <tbody>
